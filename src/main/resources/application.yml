@@ -1,0 +1,13 @@
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: serviceA
+          uri: iphash://serviceA
+          predicates:
+            - Path=/service/*
+    loadbalancer:
+      health-check:
+        path:
+          serviceA: /
+

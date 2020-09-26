@@ -19,5 +19,4 @@ public class IpHashConfiguration {
             LoadBalancerClientFactory clientFactory, LoadBalancerProperties properties) {
         return new IpHashLoadBalancerClientFilter(clientFactory, properties);
     }
-
 }

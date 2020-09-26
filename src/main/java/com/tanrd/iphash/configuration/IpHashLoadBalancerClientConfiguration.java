@@ -8,9 +8,12 @@ import org.springframework.cloud.loadbalancer.core.ServiceInstanceListSupplier;
 import org.springframework.cloud.loadbalancer.core.ServiceInstanceListSupplierBuilder;
 import org.springframework.cloud.loadbalancer.support.LoadBalancerClientFactory;
 import org.springframework.cloud.loadbalancer.support.ServiceInstanceListSuppliers;
+import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.core.env.Environment;
-
+/**
+ * @author Tan RD
+ */
 public class IpHashLoadBalancerClientConfiguration {
     @Bean
     public ReactorLoadBalancer<ServiceInstance> reactorServiceInstanceLoadBalancer(
@@ -20,8 +23,12 @@ public class IpHashLoadBalancerClientConfiguration {
         return new IpHashLoadBalancer(loadBalancerClientFactory.getLazyProvider(name,
                 ServiceInstanceListSupplier.class), name);
     }
+
     @Bean
-    public ServiceInstanceListSupplier serviceInstanceListSupplier(){
-        return
+    public ServiceInstanceListSupplier serviceInstanceListSupplier(ConfigurableApplicationContext context) {
+        return ServiceInstanceListSupplier.builder()
+                .withDiscoveryClient()
+                .withHealthChecks()
+                .build(context);
     }
 }

@@ -23,6 +23,9 @@ import static org.springframework.cloud.gateway.support.ServerWebExchangeUtils.G
 import static org.springframework.cloud.gateway.support.ServerWebExchangeUtils.GATEWAY_SCHEME_PREFIX_ATTR;
 import static org.springframework.cloud.gateway.support.ServerWebExchangeUtils.addOriginalRequestUrl;
 
+/**
+ * @author Tan RD
+ */
 @Slf4j
 public class IpHashLoadBalancerClientFilter implements GlobalFilter, Ordered {
 
@@ -55,7 +58,7 @@ public class IpHashLoadBalancerClientFilter implements GlobalFilter, Ordered {
         addOriginalRequestUrl(exchange, url);
 
         if (log.isTraceEnabled()) {
-            log.trace(org.springframework.cloud.gateway.filter.ReactiveLoadBalancerClientFilter.class.getSimpleName()
+            log.trace(IpHashLoadBalancerClientFilter.class.getSimpleName()
                     + " url before: " + url);
         }
 
